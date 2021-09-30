@@ -16,4 +16,12 @@ def index():
     else:
         return render_template('index.html', title='Inicio', user=user)
 
+@app.route('/')
+@app.route('/citas')
+def citas():
+
+    psicologo = usuario("Fabian")
+    user = {'username': psicologo.nombreUsuario}
+    return render_template('citas.html', title='Citas', user=user)
+
     
