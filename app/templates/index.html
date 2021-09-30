@@ -1,8 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Bienvenido, {{ user.username }}!</h1>
+    <h1>Bienvenido, {{user.username}}!</h1>
     {% for post in posts %}
-    <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
     {% endfor %}
+    <div class ="content">
+        <h3 style="text-align: center;">Plataforma de Manejo de Citas</h3>
+        <table style="text-align: center; border: 1">
+            <tr>
+                <th>Carne</th>
+                <th>Nombre</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>
+                <a href="">Guardar</th>
+                </td>
+            </tr>
+        </table>
+    </div>
 {% endblock %}
