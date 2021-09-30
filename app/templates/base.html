@@ -1,15 +1,27 @@
-<!doctype html>
 <html>
     <head>
-      {% if title %}
-      <title>{{ title }}</title>
-      {% else %}
-      <title>Plataforma para Manejo de Citas</title>
-      {% endif %}
+        {% if title %}
+        <title>{{ title }}</title>
+        {% else %}
+        <title>Plataforma De Manejo de Citas</title>
+        {% endif %}
     </head>
     <body>
-        <div>Seleccione una opcion: <a href="/index">Inicio</a></div>
+        <div>
+            Opciones:
+            <a href="/login">Login</a> ||
+            <a href="/index">Inicio</a>||
+        </div>
         <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
         {% block content %}{% endblock %}
     </body>
 </html>
