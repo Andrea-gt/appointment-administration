@@ -14,3 +14,13 @@ class EnteringStudentData(FlaskForm):
     nombre = StringField('Nombre de Estudiante', validators=[DataRequired()])
     carne = IntegerField('Numero de Carne', validators=[DataRequired()])
     submit = SubmitField('Ingresar Datos')
+
+class EnteringDatesData(FlaskForm):
+    fecha = IntegerField('Fecha', validators=[DataRequired()])
+    hora = IntegerField('Hora', validators=[DataRequired()])
+    estudiante = StringField('Estudiante', validators=[DataRequired()])
+    submit = SubmitField('Guardar')
+
+class EnteringHistoryData(FlaskForm):
+    nameforhistory = StringField('Nombre para el historial', validators=[DataRequired()])
+    submit = SubmitField('Guardar')

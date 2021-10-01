@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, flash, request, redirect
-from app.forms import LoginForm, EnteringStudentData
+from app.forms import LoginForm, EnteringStudentData, EnteringDatesData, EnteringHistoryData
 
 @app.route('/')
 @app.route('/index', methods=['POST', 'GET'])
@@ -17,5 +17,16 @@ def login():
         return redirect('/index')
     return render_template('login.html', title='Sign In', form=form)
 
+@app.route('/')
+@app.route('/calendario', methods=['POST', 'GET'])
+def calendario():
+    form = EnteringDatesData()
+    return render_template('calendario.html', title='Calendario', form =form)
+
+@app.route('/')
+@app.route('/historial', methods=['POST', 'GET'])
+def historial():
+    form = EnteringHistoryData()
+    return render_template('historial.html', title='Historial', form =form)
 
     
