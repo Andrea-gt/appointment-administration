@@ -2,6 +2,7 @@ from app import app
 from flask import render_template, flash, request, redirect
 from app.forms import LoginForm, EnteringStudentData
 
+@app.route('/')
 @app.route('/index', methods=['POST', 'GET'])
 def index():
     form = EnteringStudentData()
