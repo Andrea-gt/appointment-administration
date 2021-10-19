@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block content %}
     <h1>Calendario</h1>
     <form action="" method="post" novalidate>
@@ -12,19 +11,19 @@
             {% endfor %}
         </p>
         <p>
-            {{ form.hora.label }}<br>
+            {{ form.hora.label}}<br>
             {{ form.hora(size=32) }}<br>
             {% for error in form.hora.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.estudiante.label }}<br>
-            {{ form.estudiante(size=32) }}<br>
-            {% for error in form.estudiante.errors %}
+            {{ form.carne.label }}<br>
+            {{ form.carne(size=32) }}<br>
+            {% for error in form.carne.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>{{ form.submit() }}</p>
+        <p>{{form.submit() }}</p>
     </form>
 {% endblock %}
