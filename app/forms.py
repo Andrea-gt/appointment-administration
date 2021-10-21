@@ -1,8 +1,7 @@
 from flask_wtf import FlaskForm
 from datetime import datetime
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, validators
 from wtforms.fields.html5 import DateField, TimeField
-from wtforms import validators
 from wtforms.fields.core import IntegerField, StringField
 from wtforms.validators import DataRequired
 
@@ -15,6 +14,7 @@ class LoginForm(FlaskForm):
 class EnteringStudentData(FlaskForm):
     nombre = StringField('Nombre de Estudiante', validators=[DataRequired()])
     carne = IntegerField('Numero de Carne', validators=[DataRequired()])
+    carrera = StringField('Carrera de Estudiante', validators=[DataRequired()])
     submit = SubmitField('Ingresar Datos')
 
 class EnteringDatesData(FlaskForm):

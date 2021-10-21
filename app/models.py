@@ -1,12 +1,19 @@
 from app import db
 
-class User(db.Model):
+class Estudiante(db.Model):
+    carne = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(64), index=True)
+    carrera = db.Column(db.String(120), index=True)
+
+
+def __repr__(self):
+    return '<Estudiante {}>'.format(self.estudiante)
+
+class Cita(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True)
-    email = db.Column(db.String(120), index=True, unique=True)
-    password_hash = db.Column(db.String(128))
+    fecha = db.Column(db.Date)
+    hora = db.Column(db.DateTime, index=True)
+    carne = db.Column(db.Integer, primary_key=True)
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
-from app.models import User
-u = User(username='susan', email='susan@example.com')
+        return '<Cita {}>'.format(self.body)
