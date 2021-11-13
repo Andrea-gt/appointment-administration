@@ -37,7 +37,10 @@ def login():
 def index():
     form = EnteringStudentData()
     if form.validate_on_submit():
-        estudiante = Estudiante.quey.filter_by(carne=form.carne.data, nombre=form.nombre.data, carrera=form.carrera.data).first()
+        estudiante = Estudiante.query.filter_by(carne=form.carne.data, nombre=form.nombre.data, carrera=form.carrera.data).first()
+        if estudiante is None:
+            flash('Ha ocurrido un error') 
+            return redirect("http://127.0.0.1:5000/index")
         db.session.add(estudiante)
         db.session.commit()
         flash('¡Estudiante ingresado con éxito!')
@@ -70,7 +73,7 @@ def register():
         return redirect("http://127.0.0.1:5000/login")
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
+        user = User(username=form.username.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
