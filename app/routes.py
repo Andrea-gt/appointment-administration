@@ -21,8 +21,9 @@ def index():
         db.session.add(estudiante)
         db.session.commit()
         flash('¡Estudiante ingresado con éxito!')
+        estudiantes = Estudiante.query.order_by(Estudiante.date_added)
         return redirect(("http://127.0.0.1:5000/index"))
-    return render_template('index.html', title='Ingreso', form =form)
+    return render_template('index.html', title='Ingreso', form =form, estudiantes = estudiantes)
 
 
 @app.route('/calendario', methods=['GET', 'POST'])
