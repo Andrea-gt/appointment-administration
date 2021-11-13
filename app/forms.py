@@ -3,13 +3,26 @@ from datetime import datetime
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, validators
 from wtforms.fields.html5 import DateField, TimeField
 from wtforms.fields.core import IntegerField, StringField
-from wtforms.validators import DataRequired
+from wtforms.validators import ValidationError, DataRequired, EqualTo
+from app.models import User
 
 class LoginForm(FlaskForm):
     username = StringField('Usuario', validators=[DataRequired()])
     password = PasswordField('Contraseña', validators=[DataRequired()])
     remember_me = BooleanField('Recordar Contraseña')
     submit = SubmitField('Ingresar')
+
+class RegistrationForm(FlaskForm):
+    username = StringField('Usuario', validators=[DataRequired()])
+    password = PasswordField('Contraseña', validators=[DataRequired()])
+    password2 = PasswordField(
+        'Repita la contraseña', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Registrarse')
+
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user is not None:
+            raise ValidationError('Por favor ingrese un usuario distinto')
 
 class EnteringStudentData(FlaskForm):
     nombre = StringField('Nombre de Estudiante', validators=[DataRequired()])
