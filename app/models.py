@@ -22,7 +22,7 @@ class Estudiante(db.Model):
     carrera = db.Column(db.String(120), index=True)
     
     def __repr__(self):
-        return '<Estudiante {}>'.format(self.nombre)
+        return '<Nombre {}>'.format(self.nombre)
 
 class Cita(db.Model):
     id = db.Column(db.Integer, primary_key=True)

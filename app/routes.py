@@ -32,21 +32,21 @@ def login():
     return render_template('login.html', title='Login', form=form)
 
 @app.route('/')
-@app.route('/index', methods=['POST', 'GET'])
+@app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
     form = EnteringStudentData()
     if form.validate_on_submit():
-        estudiante = Estudiante.query.filter_by(carne=form.carne.data, nombre=form.nombre.data, carrera=form.carrera.data).first()
+        estudiante = Estudiante.query.filter_by(carne = form.carne.data).first()
         if estudiante is None:
-            flash('Ha ocurrido un error') 
-            return redirect("http://127.0.0.1:5000/index")
-        db.session.add(estudiante)
-        db.session.commit()
-        flash('¡Estudiante ingresado con éxito!')
-        return redirect(("http://127.0.0.1:5000/index"))
-    return render_template('index.html', title='Ingreso', form =form)
-
+            estudiante = Estudiante(nombre=form.nombre.data, carne = form.carne.data, carrera = form.carrera.data)
+            db.session.add(estudiante)
+            db.session.commit()
+            flash('¡Estudiante ingresado con exito!')
+            return redirect("/index")
+        flash("Este estudiante ya esta registrado")
+    estudiantes = Estudiante.query.filter_by()
+    return render_template('index.html', title='Ingreso', form =form, estudiantes = estudiantes)
 
 @app.route('/calendario', methods=['GET', 'POST'])
 @login_required

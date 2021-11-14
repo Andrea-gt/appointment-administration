@@ -27,4 +27,12 @@
         </p>
         <p>{{ form.submit() }}</p>
     </form>
+    <br><br><br>
+    <table class="table table-striped table-hover table-bordered table-primary">
+    {% for estudiante in estudiantes %}
+    <tr>
+        <td>{{estudiante.nombre}} - {{estudiante.carne}}</td>
+    </tr>
+    {% endfor %}
+    </table>
 {% endblock %}
