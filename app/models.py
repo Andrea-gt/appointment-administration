@@ -22,13 +22,13 @@ class Estudiante(db.Model):
     carrera = db.Column(db.String(120), index=True)
     
     def __repr__(self):
-        return '<Nombre {}>'.format(self.nombre)
+        return '<Estudiante {}>'.format(self.nombre)
 
 class Cita(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fecha = db.Column(db.Date)
-    hora = db.Column(db.DateTime, index=True)
-    carne = db.Column(db.Integer, primary_key=True)
+    hora = db.Column(db.Time, index=True)
+    carne = db.Column(db.Integer, db.ForeignKey('estudiante.carne'))
 
     def __repr__(self):
         return '<Cita {}>'.format(self.body)

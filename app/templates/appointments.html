@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Calendario</h1>
+    <h1>Citas</h1>
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
-            {{ form.fecha.label }}<br>
-            {{ form.fecha(size=32) }}<br>
+            <!-- {{ form.fecha.label }}<br>
+            {{ form.fecha(size=32) }}<br> -->
+            {{form.fecha (class= "datepicker")}}
             {% for error in form.fecha.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.hora.label}}<br>
+            {{ form.hora.label }}<br>
             {{ form.hora(size=32) }}<br>
             {% for error in form.hora.errors %}
             <span style="color: red;">[{{ error }}]</span>
@@ -26,4 +27,16 @@
         </p>
         <p>{{form.submit() }}</p>
     </form>
+
+    
+    <br><br><br>
+    <h1>Proximas Citas</h1>
+    <table class="table table-striped table-hover table-bordered table-primary">
+    {% for cita in citas %}
+    
+    <tr>
+        <td>{{ cita.fecha }} - {{ cita.hora }} - {{ cita.carne }}</td>
+    </tr>
+    {% endfor %}
+    </table>
 {% endblock %}

@@ -31,7 +31,7 @@ class EnteringStudentData(FlaskForm):
     submit = SubmitField('Ingresar Datos')
 
 class EnteringDatesData(FlaskForm):
-    fecha = DateField('Fecha',validators=[DataRequired()], format='%d/%m/%Y')
+    fecha = DateField('Fecha',validators=[DataRequired()], format='%Y-%m-%d')
     hora = TimeField('Hora', validators=[DataRequired()], format='%H:%M', default=datetime.now())
     carne = IntegerField('Carne', validators=[DataRequired()])
     submit = SubmitField('Guardar')

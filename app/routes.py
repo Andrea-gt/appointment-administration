@@ -1,3 +1,4 @@
+from datetime import date
 from app import app, db
 from flask import render_template, flash, request, redirect
 from app.forms import LoginForm, EnteringStudentData, EnteringDatesData, EnteringHistoryData, RegistrationForm
@@ -45,22 +46,35 @@ def index():
             flash('¡Estudiante ingresado con exito!')
             return redirect("/index")
         flash("Este estudiante ya esta registrado")
-    estudiantes = Estudiante.query.filter_by()
+    estudiantes = Estudiante.query.order_by(Estudiante.nombre)
     return render_template('index.html', title='Ingreso', form =form, estudiantes = estudiantes)
 
-@app.route('/calendario', methods=['GET', 'POST'])
+@app.route('/appointments', methods=['GET', 'POST'])
 @login_required
 def calendario():
     form = EnteringDatesData()
     if form.validate_on_submit():
-        return redirect('/index')
-    return render_template('calendario.html', title='Calendario', form=form)
+        cita = Cita(fecha = form.fecha.data, carne = form.carne.data, hora = form.hora.data)
+        db.session.add(cita)
+        db.session.commit()
+        flash('¡Cita agendada con exito!')
+        return redirect("/appointments")
+
+    citas = Cita.query.order_by(Cita.fecha)
+    return render_template('appointments.html', title='Citas', form =form, citas = citas)
 
 @app.route('/historial', methods=['GET', 'POST'])
 @login_required
 def historial():
     form = EnteringHistoryData()
-    return render_template('historial.html', title='Historial', form=form)
+    carneC = form.carne.data
+    if form.validate_on_submit():
+        cita = Cita.query.filter_by(carne = form.carne.data)
+        if cita == carneC:
+            flash('Datos filtrados exitosamente')
+            return redirect("/historial")
+    citas = Cita.query.filter_by(carne = carneC)
+    return render_template('historial.html', title='Historial', form=form, citas = citas)
 
 @app.route('/logout')
 def logout():
